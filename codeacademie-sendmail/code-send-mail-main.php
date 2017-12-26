@@ -2,13 +2,14 @@
 /*
 Plugin Name: SendMail Code-academie
 Plugin URI: http://code-academie.fr
-Description: Un plugin d'envoie de mail, lors d'une prise de rendez vous
+Description: Un plugin d'envoi de mail, lors d'une prise de rendez vous.
 Version: 0.1
-Author: Alice KD Francois M Romain S
+Author: Alice Kepl-Danet @alicekd - Francois Massiot @ fm35- Romain Seite @saromase - Erwann Duclos @Docusland
 Author URI: http://github.com/saromase
 License: GPL2
 */
 
+wp_enqueue_style( 'plugin-stylesheet', plugins_url( '/style.css', __FILE__ ) );
 add_action( 'admin_menu', 'add_menu_plugin' );
 register_activation_hook(__FILE__,'database_install');
 

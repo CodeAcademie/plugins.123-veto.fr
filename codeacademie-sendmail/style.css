@@ -1,0 +1,26 @@
+#rdv{
+  background-color: #ddd;
+  display: flex;
+  justify-content: space-around;
+}
+.section{
+  display: flex;
+  justify-content: space-around;
+flex-direction: column;
+}
+.section div{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  margin-top: 1em;
+}
+.section div label{
+  width: 40%;
+}
+.section div input, .section div select{
+  width: 60%;
+}
+.section textarea{
+  width:100%;
+  border : 1px solid gray;
+}
