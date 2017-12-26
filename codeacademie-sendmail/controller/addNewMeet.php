@@ -66,15 +66,15 @@
         </div> <!-- fin de section2 -->
       </form>
   </section>
-  
- <?php 
+
+ <?php
 global $wpdb;
 $table_name = $wpdb->prefix . 'code_academie';
     if (isset($_POST['submit'])){
         error_log($_POST['motif']);
-        $wpdb->insert( 
-            $table_name, 
-            array( 
+        $wpdb->insert(
+            $table_name,
+            array(
                 'name' => $_POST['name'],
                 'firstname' => $_POST['first_name'],
                 'mail' => $_POST['mail'],
@@ -85,21 +85,21 @@ $table_name = $wpdb->prefix . 'code_academie';
                 'message' => $_POST['message'],
                 'motif' => $_POST['motif'],
                 'status' => 0,
-                'hour_meet' => null
-            ), 
-            array( 
-                '%s', 
-                '%s', 
-                '%s', 
-                '%s', 
-                '%s', 
-                '%s', 
-                '%s', 
-                '%s', 
-                '%s', 
+                'hour_meet' => $_POST['hour_meet'],
+            ),
+            array(
+                '%s',
+                '%s',
+                '%s',
+                '%s',
+                '%s',
+                '%s',
+                '%s',
+                '%s',
+                '%s',
                 '%d',
                 '%s',
-            ) 
+            )
         );
     }
 

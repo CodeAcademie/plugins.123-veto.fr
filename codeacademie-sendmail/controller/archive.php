@@ -1,4 +1,4 @@
-<?php 
+<?php
 global $wpdb;
 $table_name = $wpdb->prefix . 'code_academie';
 $result = $wpdb->get_results( "SELECT * FROM $table_name"); ?><table>
@@ -28,8 +28,8 @@ foreach ($result as $datas){?>
         <td><?= $datas->message ?></td>
         <td><?= $datas->motif ?></td>
         <td><?= $datas->status ?></td>
-        <td><?= $datas->hour_meet ?></td> 
+        <td><?= $datas->hour_meet ?></td>
     </tr>
 <?php } ?>
-    
+
 </table>
