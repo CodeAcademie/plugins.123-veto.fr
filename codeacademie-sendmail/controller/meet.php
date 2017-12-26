@@ -98,13 +98,14 @@ $motifs = [
 $statuses = ["0"=> "Non", "1" => "Oui"];
 
 if (!isset($_POST['modif_form'])){
-    $result = $wpdb->get_results( "SELECT * FROM $table_name WHERE date > CURDATE()  ORDER BY date ASC");
+    $result = $wpdb->get_results( "SELECT * FROM $table_name WHERE date > CURDATE()  ORDER BY timestamp");
     ?>
        <h1>Les prochains rendez-vous : </h1> <?php
     foreach ($result as $datas){ ?>
         <div class="box">
             <h1 class="<?php echo ($datas->status == 0) ? 'red' : 'green' ?>">
                 <?php echo $datas->name . " " . $datas->firstname; ?>
+                <br /><small> <?= $datas->date; ?>  </small>
             </h1>
             <div>
 
@@ -114,9 +115,7 @@ if (!isset($_POST['modif_form'])){
                 <p>Tel :
                     <?= $datas->tel; ?>
                 </p>
-                <p>Date souhaitée :
-                    <?= $datas->date; ?>
-                </p>
+
                 <p>Type de l'animal :
                     <?= $datas->animal; ?>
                 </p>

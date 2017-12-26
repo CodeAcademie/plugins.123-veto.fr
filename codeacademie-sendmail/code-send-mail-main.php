@@ -19,7 +19,7 @@ function database_install() {
     $jal_db_version = '1.0';
 
 	$table_name = $wpdb->prefix . 'code_academie';
-	
+
 	$charset_collate = $wpdb->get_charset_collate();
 
 	$sql = "CREATE TABLE $table_name (
@@ -49,7 +49,7 @@ function add_menu_plugin() {
     add_menu_page( 'CodeAcademie', 'CodeAcademie', 'read', 'CodeAcademie_Dashboard', 'nextMeet' );
     add_submenu_page( 'CodeAcademie_Dashboard', 'MonPlugin', 'Gestion des RDV', 'read', 'CodeAcademie_Dashboard', 'nextMeet');
     add_submenu_page( 'CodeAcademie_Dashboard', 'MonPlugin', 'Ajouter un RDV', 'read', 'addNewMeet', 'addNewMeet');
-    add_submenu_page( 'CodeAcademie_Dashboard', 'MonPlugin', 'Archive', 'read', 'archive', 'archive');
+    add_submenu_page( 'CodeAcademie_Dashboard', 'MonPlugin', 'Archives', 'read', 'archive', 'archive');
 }
 
 function nextMeet() {
