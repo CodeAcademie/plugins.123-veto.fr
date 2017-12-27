@@ -1,26 +1,76 @@
-#rdv{
-  background-color: #ddd;
+#codeacademie{
+  /*background-color: #ddd;*/
   display: flex;
-  justify-content: space-around;
+  justify-content: start;
+  width: 100%;
 }
-.section{
+
+/******************** Back-End *****************/
+#codeacademie .section{
   display: flex;
   justify-content: space-around;
 flex-direction: column;
+
 }
-.section div{
+#codeacademie  form{
+  width:100%;
+
+}
+#codeacademie .section div{
   display: flex;
   flex-direction: row;
   justify-content: start;
   margin-top: 1em;
 }
-.section div label{
+#codeacademie .section div label{
   width: 40%;
 }
-.section div input, .section div select{
+#codeacademie .section div input, .section div select{
   width: 60%;
 }
-.section textarea{
+#codeacademie .section textarea{
   width:100%;
   border : 1px solid gray;
+}
+
+
+/************************** Front End with shortcode ******************/
+#codeacademie.shortcode .formulaire, #codeacademie.shortcode .animal-contact{
+  flex-direction: column;
+  justify-content: start;
+  height: 100%;
+}
+
+#codeacademie.shortcode  .wpcf7-submit{
+  margin-top: 5px;
+  padding-left: 0px;
+  height: 40px;
+  width: 30vw;
+  border: 1px solid #a9a9a9;
+  margin-bottom:2em;
+  /*padding-bottom:1em;*/
+
+}
+#codeacademie.shortcode .animal-contact{
+  align-items: center;
+}
+
+#codeacademie .animal-contact div select,
+#codeacademie .animal-contact div input{
+  width: 30vw !important;
+}
+
+#codeacademie .animal-contact textarea{
+  width:30vw !important;
+  border : 1px solid gray;
+}
+#codeacademie .animal-contact .motif, .animal-contact .message{
+  width: 30vw;
+}
+.codeacademie.alert-success{
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  position:absolute;
+  width:100%;
 }

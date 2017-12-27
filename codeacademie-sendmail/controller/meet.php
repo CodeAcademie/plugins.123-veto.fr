@@ -98,7 +98,7 @@ $motifs = [
 $statuses = ["0"=> "Non", "1" => "Oui"];
 
 if (!isset($_POST['modif_form'])){
-    $result = $wpdb->get_results( "SELECT * FROM $table_name WHERE date > CURDATE()  ORDER BY timestamp");
+    $result = $wpdb->get_results( "SELECT * FROM $table_name WHERE date > CURDATE()  ORDER BY timestamp DESC");
     ?>
        <h1>Les prochains rendez-vous : </h1> <?php
     foreach ($result as $datas){ ?>

@@ -9,6 +9,7 @@ Author URI: http://github.com/saromase
 License: GPL2
 */
 
+
 wp_enqueue_style( 'plugin-stylesheet', plugins_url( '/style.css', __FILE__ ) );
 add_action( 'admin_menu', 'add_menu_plugin' );
 register_activation_hook(__FILE__,'database_install');
@@ -62,3 +63,34 @@ function addNewMeet() {
 function archive() {
     include('controller/archive.php');
 }
+
+add_shortcode( "codeacademie_form", "codeacademie_shortcode");
+
+function display_form($content = null){
+  include('shortcode/createMeet.php');
+
+      return $content;
+}
+function store_meet_in_db(){
+  global $wpdb;
+  $table_name = $wpdb->prefix . 'code_academie';
+  if (isset($_POST['submit'])) {
+    include('models/Meet.php');
+    $meet = new Meet($_POST);
+      // error_log($_POST['motif']);
+      $wpdb->insert(
+          $table_name,
+          $meet->toArr()
+      );
+      echo "<div class='codeacademie alert-success' style='float:left'> Message envoyé </div>";
+
+  }
+}
+function codeacademie_shortcode() {
+    ob_start();
+    display_form();
+
+    return ob_get_clean();
+}
+
+add_action( 'init', 'store_meet_in_db' );

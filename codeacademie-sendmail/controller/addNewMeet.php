@@ -1,7 +1,7 @@
 
 
 
-<section id="rdv">
+<section id="codeacademie">
 
       <form action="" method="post">
         <h1>Prise de rendez-vous</h1>
