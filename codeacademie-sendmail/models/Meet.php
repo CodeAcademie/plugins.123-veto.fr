@@ -5,6 +5,7 @@
  */
 class Meet
 {
+    private $id;
     private $name;
     private $firstname;
     private $mail;
@@ -36,6 +37,12 @@ class Meet
           }
       }
 
+    public function getId(){
+      return $this->id;
+    }
+    public function setId($id){
+      $this->id = $id;
+    }
   public function setName($name){
     $this->name = $name;
   }
@@ -91,16 +98,25 @@ class Meet
   public function getMotif(){
     return $this->motif;
   }
+
+  /**
+  * Accepted statuses :
+  *  0  : default value
+  *  1  : confirmed
+  *  3  : email_sent
+  *  7  : in_the_past
+  *  9  : deleted
+  */
   public function setStatus($status){
     $this->status = $status;
   }
   public function getStatus(){
     return $this->status;
   }
-  public function setHour_meet($hour_meet){
+  public function setHourMeet($hour_meet){
     $this->hour_meet = $hour_meet;
   }
-  public function getHour_meet(){
+  public function getHourMeet(){
     return $this->hour_meet;
   }
 
