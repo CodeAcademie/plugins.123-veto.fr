@@ -62,16 +62,10 @@ global $post;
           <div class="message">
             <textarea name="message" placeholder="Votre message (facultatif)" class="big"></textarea>
           </div>
-          <div>
+          <div class='submit'>
             <button type="submit" class="wpcf7-submit" name="submit">Envoyer</button>
           </div>
         </div>
       </div>
       </form>
   </section>
-
- <?php
-
-
- error_log("--------------------------LOADING-----------------------");
-?>
