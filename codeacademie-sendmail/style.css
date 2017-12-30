@@ -38,8 +38,9 @@ flex-direction: column;
 /************************** Front End with shortcode ******************/
 #codeacademie.shortcode .formulaire, #codeacademie.shortcode .animal-contact{
   flex-direction: column;
-  justify-content: start;
+  justify-content: space-around;
   height: 100%;
+
 }
 
 #codeacademie.shortcode  .wpcf7-submit{
@@ -74,6 +75,11 @@ flex-direction: column;
   border-color: #d6e9c6;
   position:absolute;
   width:100%;
+}
+@media screen and (min-width:871px){
+  #codeacademie.shortcode .formulaire{
+    background-image: none;
+  }
 }
 @media screen and (max-width: 871px){
   #codeacademie.shortcode .formulaire{
