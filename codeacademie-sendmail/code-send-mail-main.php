@@ -51,6 +51,7 @@ function add_menu_plugin() {
     add_submenu_page( 'CodeAcademie_Dashboard', 'MonPlugin', 'Gestion des RDV', 'read', 'CodeAcademie_Dashboard', 'nextMeet');
     add_submenu_page( 'CodeAcademie_Dashboard', 'MonPlugin', 'Ajouter un RDV', 'read', 'addNewMeet', 'addNewMeet');
     add_submenu_page( 'CodeAcademie_Dashboard', 'MonPlugin', 'Archives', 'read', 'archive', 'archive');
+    add_submenu_page( 'CodeAcademie_Dashboard', 'MonPlugin', 'Envoyer les mails', 'read', 'send', 'send');
 }
 
 function nextMeet() {
@@ -61,6 +62,10 @@ function addNewMeet() {
     include('controller/addNewMeet.php');
 }
 function archive() {
+    include('controller/archive.php');
+}
+function send() {
+    send_rdv_mail();
     include('controller/archive.php');
 }
 
@@ -96,9 +101,13 @@ add_action( 'init', 'store_meet_in_db' );
 // add_action( 'wp_loaded', 'cron_time' );
 // require_once( dirname(__FILE__) . '/../../../wp-load.php' );
 
-if ( ! wp_next_scheduled( 'send_mail_cron' ) ) {
-  error_log(" SCHEDULING NEXT CRON IN AN HOUR");
-  wp_schedule_event( time(), 'hourly', 'send_mail_cron' );
+register_activation_hook(__FILE__, 'launch_cron_tasks');
+
+function launch_cron_tasks(){
+  if ( ! wp_next_scheduled( 'send_mail_cron' ) ) {
+    error_log(" SCHEDULING NEXT CRON IN AN HOUR");
+    wp_schedule_event( time(), 'hourly', 'send_mail_cron' );
+  }
 }
 
 add_action( 'send_mail_cron', 'send_rdv_mail' );
@@ -106,9 +115,7 @@ add_action( 'send_mail_cron', 'send_rdv_mail' );
 // add_action( 'wp_loaded', 'send_rdv_mail' );
 
 function send_rdv_mail() {
-  $toemail = get_bloginfo('admin_email');
   $site_name = get_bloginfo('name');
-  print_r("TO : ".$toemail);
   global $wpdb;
   $table_name = $wpdb->prefix . 'code_academie';
   $enddate = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 2, date('Y')));
@@ -119,18 +126,25 @@ function send_rdv_mail() {
   $mail_template_title = 'Votre Rendez-Vous chez %s';
   $mail_title = sprintf($mail_template_title, $site_name);
 
-  $mail_template_content  = "Bonjour %s %s,\r\nN'oubliez pas votre rendez-vous le %s à %s h ! Venez avec votre animal %s, ainsi que son carnet de santé. \r\n La clinique vétérinaire";
+  $mail_template_content  = "Bonjour %s %s,\r\n
+                             N'oubliez pas votre rendez-vous le %s à %s h ! Venez avec votre animal %s, ainsi que son carnet de santé. \r\n
+                             La clinique vétérinaire";
   $record_upd= ['status'=>3];
   $record_to_upd = [];
   foreach ($results as $key => $row) {
+
       $meet = new Meet($row);
-      $mail_content = sprintf($mail_template_content, $meet->getFirstname(), $meet->getName(), $meet->getDate(), $meet->getHourMeet(), $meet->getNameAnimal());
-      error_log(" SENDING EMAIL to $toemail : $mail_content");
-      $res = wp_mail( $toemail, $mail_title , $mail_content);
-      error_log(" SENDING EMAIL result : $res");
-      $meet->setStatus(3); // Setting email sent to corresponding meet record.
-      $record = ["ID" => $meet->getId()];
-      // $wpdb->update($table_name, $record_upd, $record, array('%d'), array('%d'));
+      $to_email = $meet->getMail();
+      error_log("Testing email $to_email");
+      if(!is_null($to_email) && filter_var($to_email, FILTER_VALIDATE_EMAIL)){
+        $mail_content = sprintf($mail_template_content, $meet->getFirstname(), $meet->getName(), $meet->getDate(), $meet->getHourMeet(), $meet->getNameAnimal());
+        error_log(" SENDING EMAIL to $to_email : $mail_content");
+        $res = wp_mail( $to_email, $mail_title , $mail_content);
+        error_log(" SENDING EMAIL result : $res");
+        $meet->setStatus(3); // Setting email sent to corresponding meet record.
+        $record = ["ID" => $meet->getId()];
+        // $wpdb->update($table_name, $record_upd, $record, array('%d'), array('%d'));
+      }
   }
 
   // wp_mail( $toemail, , $mail_content);
