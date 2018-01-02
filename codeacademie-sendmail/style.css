@@ -5,7 +5,32 @@
   width: 100%;
   min-height: 80vh;
 }
+.box.status-0, .box.status-1,.box.status-3,.box.status-7,.box.status-9{
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100px 100px;
+}
+.box.status-0{
+  background-image: url('image/non-confirm.svg');
+}
+.box.status-1{
+  background-image: url('image/confirm.svg');
+}
 
+.box.status-3{
+  background-image: url('image/E-mail.png');
+}
+.box.status-7{
+  background-color:#c0c0c0;
+}
+.box.status-9{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+33,ff0000+35,ff0000+42,ffffff+46,ffffff+100 */
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #ffffff 0%, #ffffff 44%, #ff0000 45%, #ff0000 49%, #ffffff 50%, #ffffff 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #ffffff 0%,#ffffff 44%,#ff0000 45%,#ff0000 49%,#ffffff 50%,#ffffff 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #ffffff 0%,#ffffff 44%,#ff0000 45%,#ff0000 49%,#ffffff 50%,#ffffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
 /******************** Back-End *****************/
 #codeacademie .section{
   display: flex;
@@ -40,10 +65,11 @@ flex-direction: column;
   flex-direction: column;
   justify-content: space-around;
   height: 100%;
+  border-bottom: 0px;
 
 }
 
-#codeacademie.shortcode  .wpcf7-submit{
+#codeacademie.shortcode  .wpcf7-submit, #codeacademie button{
   margin-top: 5px;
   padding-left: 0px;
   height: 40px;
@@ -52,6 +78,10 @@ flex-direction: column;
   margin-bottom:2em;
   /*padding-bottom:1em;*/
 
+}
+#codeacademie button{
+  margin-left:auto;
+  margin-right:auto;
 }
 #codeacademie.shortcode .animal-contact{
   align-items: center;

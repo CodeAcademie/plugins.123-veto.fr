@@ -1,7 +1,8 @@
 <?php
-global $wpdb;
-$table_name = $wpdb->prefix . 'code_academie';
-$result = $wpdb->get_results( "SELECT * FROM $table_name"); ?><table>
+
+$result = Meet::findAll();
+
+?><table>
     <tr>
         <td>Nom</td>
         <td>Prénom</td>
@@ -19,15 +20,15 @@ $result = $wpdb->get_results( "SELECT * FROM $table_name"); ?><table>
 foreach ($result as $datas){?>
     <tr>
         <td><?= $datas->name ?></td>
-        <td><?= $datas->first_name ?></td>
+        <td><?= $datas->firstName ?></td>
         <td><?= $datas->mail ?></td>
         <td><?= $datas->tel ?></td>
         <td><?= $datas->date ?></td>
         <td><?= $datas->animal ?></td>
         <td><?= $datas->name_animal ?></td>
         <td><?= $datas->message ?></td>
-        <td><?= $datas->motif ?></td>
-        <td><?= $datas->status ?></td>
+        <td><?= Meet::MOTIFS[$datas->motif] ?></td>
+        <td><?= Meet::STATUSES[$datas->status] ?></td>
         <td><?= $datas->hour_meet ?></td>
     </tr>
 <?php } ?>

@@ -5,7 +5,7 @@ global $post;
 
 <section id="codeacademie" class="shortcode">
 
-      <form action=" <?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" method="post">
+      <form action=" <?php echo esc_url($_SERVER['REQUEST_URI']); ?>" method="post">
 
         <div class="formulaire contact">
           <div class="center-element-contact">
@@ -27,14 +27,6 @@ global $post;
                 <input name="tel" placeholder="*Téléphone" required="required"><br/>
               </p>
             </div>
-
-
-
-
-
-
-
-
         </div>
         <div class="animal-contact contact">
             <div class="center-element-contact">
@@ -51,11 +43,15 @@ global $post;
           <p class="motif">
               <select name="motif" required>
                 <option class="motiv"  disabled selected style="display: none;">* Motif</option>
-                <option value="Vaccin">Vaccin</option>
-                <option value="Medecine">Médecine</option>
+                <?php
+                  foreach (Meet::MOTIFS as $key => $value) {
+                    echo "<option value='$key'>$value</option>";
+                  }
+                 ?>
+                <!-- <option value="Medecine">Médecine</option>
                 <option value="sterilisation">Chirurgie: stérilisation</option>
                 <option value="detartrage">Chirurgie: détartrage</option>
-                <option value="Autres">Autres</option>
+                <option value="Autres">Autres</option> -->
               </select>
           </p>
 
